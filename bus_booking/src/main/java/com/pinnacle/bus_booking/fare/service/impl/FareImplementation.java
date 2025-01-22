@@ -29,7 +29,7 @@ public class FareImplementation implements FareService{
 	}
 
 	@Override
-	public Optional<Fare> updateFare(Long id, Fare fare) {
+	public Optional<Fare> updateFare(String id, Fare fare) {
 	    return repo.findById(id).map(existingFare -> {
 	        existingFare.setRoute(fare.getRoute());
 	        existingFare.setFromLocation(fare.getFromLocation());
@@ -40,7 +40,7 @@ public class FareImplementation implements FareService{
 	}
 
 	@Override
-	public void deleteFare(Long id) {
+	public void deleteFare(String id) {
 		repo.deleteById(id);
 	}
 

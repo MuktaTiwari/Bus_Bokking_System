@@ -1,47 +1,33 @@
 package com.pinnacle.bus_booking.fare.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;  // Correct import for @Id
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;  // Correct import for @Field
 
-@Entity 
-@Data
-@NoArgsConstructor 
-@AllArgsConstructor 
+@Document(collection = "Locations")
 public class Locations {
-	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "name")
-	private String name;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    private String id;  // MongoDB typically uses String for the _id field
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Field("name")  // Using @Field to map the field to MongoDB if necessary
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    // Getter and Setter for id
+    public String getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	
-	
+    // Getter and Setter for name
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

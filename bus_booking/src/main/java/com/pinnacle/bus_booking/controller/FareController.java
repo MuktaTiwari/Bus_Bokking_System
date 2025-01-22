@@ -35,7 +35,7 @@ public class FareController {
     }
 
     @PutMapping("/{id}")
-    public String updateFare(@PathVariable Long id, @RequestBody Fare fare) {
+    public String updateFare(@PathVariable String id, @RequestBody Fare fare) {
         Optional<Fare> updatedFare = fareService.updateFare(id, fare);
         return updatedFare
                 .map(f -> "Fare updated successfully")
@@ -43,7 +43,7 @@ public class FareController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteFare(@PathVariable Long id) {
+    public String deleteFare(@PathVariable String id) {
         fareService.deleteFare(id);
         return "Fare deleted successfully";
     }

@@ -12,8 +12,8 @@ public interface LocationService {
 
 	Locations saveLcoation(Locations loc);
 
-    Optional<Locations> updateLocation(Long id, Locations loc); // Return Optional<Locations>
+    Optional<Locations> updateLocation(String id, Locations loc); // Return Optional<Locations>
 
-	void deleteLocations(Long id);
+	void deleteLocations(String id);
 
 }

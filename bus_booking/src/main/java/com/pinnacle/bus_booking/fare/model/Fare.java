@@ -1,41 +1,33 @@
 package com.pinnacle.bus_booking.fare.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;  // Correct import for @Id
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;  // Correct import for @Field
 
-@Entity
-@NoArgsConstructor  // Lombok will generate the no-args constructor
-@AllArgsConstructor // Lombok will generate the all-args constructor
+@Document(collection = "fares")
 public class Fare {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;  // MongoDB uses String for the ID
 
-    @Column(name = "route")
+    @Field("route")
     private String route;
 
-    @Column(name = "from_location")
+    @Field("from_location")
     private String fromLocation;
 
-    @Column(name = "to_location")
+    @Field("to_location")
     private String toLocation;
 
-    @Column(name = "price")
+    @Field("price")
     private double price;
 
-
     // Getter and Setter for id
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -74,5 +66,4 @@ public class Fare {
     public void setPrice(double price) {
         this.price = price;
     }
-
 }
