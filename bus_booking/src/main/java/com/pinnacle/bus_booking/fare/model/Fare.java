@@ -1,46 +1,36 @@
 package com.pinnacle.bus_booking.fare.model;
 
-import org.springframework.data.annotation.Id;  // Correct import for @Id
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;  // Correct import for @Field
+import jakarta.persistence.*;
 
-@Document(collection = "fares")
+@Entity
+@Table(name = "fares")
 public class Fare {
 
     @Id
-    private String id;  // MongoDB uses String for the ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-increment strategy
+    private Long id;
 
-    @Field("route")
-    private String route;
-
-    @Field("from_location")
+    @Column(name = "from_location")
     private String fromLocation;
 
-    @Field("to_location")
+    @Column(name = "to_location")
     private String toLocation;
 
-    @Field("price")
+    @Column(name = "route")
+    private String route;
+
+    @Column(name = "price")
     private double price;
 
-    // Getter and Setter for id
-    public String getId() {
+    // Getters and Setters
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    // Getter and Setter for route
-    public String getRoute() {
-        return route;
-    }
-
-    public void setRoute(String route) {
-        this.route = route;
-    }
-
-    // Getter and Setter for fromLocation
     public String getFromLocation() {
         return fromLocation;
     }
@@ -49,7 +39,6 @@ public class Fare {
         this.fromLocation = fromLocation;
     }
 
-    // Getter and Setter for toLocation
     public String getToLocation() {
         return toLocation;
     }
@@ -58,7 +47,14 @@ public class Fare {
         this.toLocation = toLocation;
     }
 
-    // Getter and Setter for price
+    public String getRoute() {
+        return route;
+    }
+
+    public void setRoute(String route) {
+        this.route = route;
+    }
+
     public double getPrice() {
         return price;
     }

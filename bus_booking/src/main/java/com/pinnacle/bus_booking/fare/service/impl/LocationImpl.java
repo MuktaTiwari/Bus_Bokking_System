@@ -32,7 +32,7 @@ public class LocationImpl implements LocationService{
 
 
 	@Override
-	public Optional<Locations> updateLocation(String id, Locations loc) {
+	public Optional<Locations> updateLocation(Long id, Locations loc) {
 	    return repo.findById(id).map(existingLocations -> {
 	        existingLocations.setName(loc.getName());
 	        return repo.save(existingLocations); // Save and return the updated entity
@@ -41,7 +41,7 @@ public class LocationImpl implements LocationService{
 
 
 	@Override
-	public void deleteLocations(String id) {
+	public void deleteLocations(Long id) {
 		repo.deleteById(id);
 	}
 

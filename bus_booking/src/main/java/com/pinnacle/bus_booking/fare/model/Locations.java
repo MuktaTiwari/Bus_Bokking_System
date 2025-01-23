@@ -1,28 +1,27 @@
 package com.pinnacle.bus_booking.fare.model;
 
-import org.springframework.data.annotation.Id;  // Correct import for @Id
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;  // Correct import for @Field
+import jakarta.persistence.*;
 
-@Document(collection = "Locations")
+@Entity
+@Table(name = "locations")
 public class Locations {
 
     @Id
-    private String id;  // MongoDB typically uses String for the _id field
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-increment strategy
+    private Long id;
 
-    @Field("name")  // Using @Field to map the field to MongoDB if necessary
+    @Column(name = "name")
     private String name;
 
-    // Getter and Setter for id
-    public String getId() {
+    // Getters and Setters
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    // Getter and Setter for name
     public String getName() {
         return name;
     }

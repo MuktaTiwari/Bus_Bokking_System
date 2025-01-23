@@ -15,8 +15,8 @@ public interface FareService {
 
 	List<Fare> getAllFares();
 
-	Optional<Fare> updateFare(String id, Fare fare);
+	Optional<Fare> updateFare(Long id, Fare fare);
 	
-	void deleteFare(String id);
+	void deleteFare(Long id);
 
 }

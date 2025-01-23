@@ -40,7 +40,7 @@ public class LocationController {
 	
 	
 	@PutMapping("/{id}")
-	public String updateLocation(@PathVariable String id, @RequestBody Locations loc) {
+	public String updateLocation(@PathVariable Long id, @RequestBody Locations loc) {
 	    Optional<Locations> updateLocation = locationService.updateLocation(id, loc);
 	    return updateLocation
 	            .map(l -> ("Location Updated"))
@@ -49,7 +49,7 @@ public class LocationController {
 	
 	
 	@DeleteMapping("/{id}")
-    public String deleteLocations(@PathVariable String id) {
+    public String deleteLocations(@PathVariable Long id) {
         locationService.deleteLocations(id);
         return "Locations deleted successfully";
     }
