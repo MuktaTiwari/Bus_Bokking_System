@@ -1,33 +1,19 @@
 package com.pinnacle.bus_booking.fare.model;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "fares")
 public class Fare {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-increment strategy
-    private Long id;
-
-    @Column(name = "from_location")
+    private int id;
     private String fromLocation;
-
-    @Column(name = "to_location")
     private String toLocation;
-
-    @Column(name = "route")
     private String route;
-
-    @Column(name = "price")
     private double price;
 
-    // Getters and Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
