@@ -1,45 +1,45 @@
 package com.pinnacle.bus_booking.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.pinnacle.bus_booking.Repository.LocationRepository;
 import com.pinnacle.bus_booking.model.Locations;
 
 @Service
 public class LocationService {
-    
 
     @Autowired
-    private LocationRepository repo;
+    @Qualifier("mysqlJdbcTemplate")
+    private JdbcTemplate jdbcTemplate;
 
-    public Locations saveLocation(Locations location) {
-        return repo.save(location);
+    public List<Locations> getAllLocation() {
+        
+        String sql = "SELECT * FROM locations";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Locations.class));
     }
 
-    public List<Locations> getAllLocations() {
-        return repo.findAll();
+    public Locations saveLocation (Locations locations) {
+        String sql = "INSERT INTO locations (name) VALUES (?)";
+        jdbcTemplate.update(sql, locations.getName(), locations.getId());
+        return locations; 
     }
 
-    public void deleteLocation(int id) {
-        repo.deleteById(id);
+    public Locations updateLocations(Locations locations) {
+        String sql = "UPDATE locations SET name = ? WHERE id = ?";
+        jdbcTemplate.update(sql, locations.getName(), locations.getId());
+        return locations;  
     }
 
-    public Optional<Locations> getLocationById(int id) {
-        return repo.findById(id);
+    public void deleteLocations(int id) {
+        String sql = "DELETE FROM locations WHERE id = ?";
+        jdbcTemplate.update(sql, id);  // Pass the id as the parameter to the query
     }
 
-    public Locations updateLocation(int id, Locations locationDetails) {
 
-        if(repo.existsById(id)){
-            locationDetails.setId(id);
-            return repo.save(locationDetails);
-        }
-        return null;
-
-  }
     
 }

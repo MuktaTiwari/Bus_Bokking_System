@@ -1,18 +1,9 @@
 package com.pinnacle.bus_booking.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
 
-
-@Entity
-@Table(name = "locations")
 public class Locations {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
     private int id;
 	private String name;
 

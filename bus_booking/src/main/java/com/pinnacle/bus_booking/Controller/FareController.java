@@ -19,28 +19,26 @@ import com.pinnacle.bus_booking.model.Fare;
 @RequestMapping("/fares")
 public class FareController {
 
-
     @Autowired
-
     private FareService fareService;
 
-    @PostMapping
-    public Fare saveFare(@RequestBody Fare fare){
-        return fareService.saveFare(fare);
-    }
-
     @GetMapping
-    public List<Fare> getAllFares(){
+    public List<Fare> getAllFares() {
         return fareService.getAllFares();
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteFare(@PathVariable String id){
-        fareService.deleteFare(id);
+    @PostMapping
+    public Fare saveFares(@RequestBody Fare fare) {
+        return fareService.saveFares(fare);
     }
 
     @PutMapping("/{id}")
-    public Fare updateFare(@PathVariable String id, @RequestBody Fare fare){
-        return fareService.updateFare(id, fare);
+    public Fare updateFares(@RequestBody Fare fare, @PathVariable String id) {
+        return fareService.updateFares(fare, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteFare(@PathVariable String id) {
+        fareService.deleteFare(id);
     }
 }

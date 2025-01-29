@@ -13,36 +13,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinnacle.bus_booking.Service.RouteService;
+import com.pinnacle.bus_booking.model.Locations;
 import com.pinnacle.bus_booking.model.Route;
 
 @RestController
-@RequestMapping("/route")
+@RequestMapping("/routes")
 public class RouteController {
+    
 
     @Autowired
     private RouteService routeService;
 
+    @GetMapping
+    public List<Route> getAllRoutes(){
+        return routeService.getAllRoutes();
+    }
 
     @PostMapping
-    public Route saveRoute(@RequestBody Route route){
-        return routeService.saveRoute(route);
+    public Route SaveRoutes(@RequestBody Route route){
+        return routeService.SaveRoutes(route);
     }
 
-    @GetMapping
-    public List<Route> getAllRoute(){
-        return routeService.getAllRoute();
-        
-    }
 
     @PutMapping("/{id}")
-    public Route updateRoute(@PathVariable int id, @RequestBody Route route){
-
-        return routeService.updateRoute(id, route);
+    public Route updateLocations(@PathVariable int id, @RequestBody Route route) {
+        route.setId(id); 
+        return routeService.updateLocations(route);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRoute(@PathVariable int id){
-        routeService.deleteRoute(id);
+    public void deleteLocations(@PathVariable int id) {
+        routeService.deleteLocations(id);  
     }
+
+
     
 }
