@@ -1,14 +1,14 @@
-package com.pinnacle.bus_booking.fare.model;
+package com.pinnacle.bus_booking.model;
 
-import org.springframework.data.annotation.Id;  // Correct import for @Id
+import org.springframework.data.annotation.Id; 
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;  // Correct import for @Field
+import org.springframework.data.mongodb.core.mapping.Field;  
 
 @Document(collection = "fares")
 public class Fare {
 
     @Id
-    private String id;  // MongoDB uses String for the ID
+    private String id;  
 
     @Field("route")
     private String route;
