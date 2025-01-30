@@ -1,20 +1,15 @@
 package com.pinnacle.bus_booking.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.pinnacle.bus_booking.fare.model.Fare;
 import com.pinnacle.bus_booking.fare.service.FareService;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/fare")
@@ -24,27 +19,28 @@ public class FareController {
     private FareService fareService;
 
     @GetMapping("/all")
-    public List<Fare> getAllFares() {
-        return fareService.getAllFares();
+    public ResponseEntity<List<Fare>> getAllFares() {
+        List<Fare> fares = fareService.getAllFares();
+        return new ResponseEntity<>(fares, HttpStatus.OK);
     }
 
     @PostMapping("/save")
-    public String saveFare(@RequestBody Fare fare) {
+    public ResponseEntity<String> saveFare(@RequestBody Fare fare) {
         Fare createdFare = fareService.saveFares(fare);
-        return "Fare Save successfully with ID: " + createdFare.getId();
+        return new ResponseEntity<>("Fare saved successfully with ID: " + createdFare.getId(), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public String updateFare(@PathVariable Long id, @RequestBody Fare fare) {
+    public ResponseEntity<String> updateFare(@PathVariable Long id, @RequestBody Fare fare) {
         Optional<Fare> updatedFare = fareService.updateFare(id, fare);
         return updatedFare
-                .map(f -> "Fare updated successfully")
-                .orElseGet(() -> "Fare not found");
+                .map(f -> new ResponseEntity<>("Fare updated successfully", HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>("Fare not found", HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public String deleteFare(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFare(@PathVariable Long id) {
         fareService.deleteFare(id);
-        return "Fare deleted successfully";
+        return new ResponseEntity<>("Fare deleted successfully", HttpStatus.NO_CONTENT);
     }
 }
